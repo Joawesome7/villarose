@@ -1,0 +1,32 @@
+<div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <h2 class="text-3xl font-bold text-emerald-800 mb-6">AMENITIES:</h2>
+      <ul class="space-y-4">
+        {% for amenity in amenities %}
+        <li
+          class="flex items-center p-3 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors"
+        >
+          <span class="text-3xl mr-4">{{ amenity.icon }}</span>
+          <span class="text-xl font-medium">{{ amenity.name }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-xl p-8">
+      <h2 class="text-3xl font-bold text-emerald-800 mb-6">OTHER AMENITIES:</h2>
+      <p class="mb-6 text-lg font-medium">AVAILABLE FOR BOOKING:</p>
+      <div class="grid grid-cols-2 gap-4">
+        {% for activity in activities %}
+        <div
+          class="flex items-center p-3 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors"
+        >
+          <span class="text-2xl mr-3">{{ activity.icon }}</span>
+          <span class="font-medium">{{ activity.name }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manggadiwa Resort & Spa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  </head>
+  <body class="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
+    <!-- Combined Header & Discount Banner -->
+    <header
+      style="background-image: url('{{ url_for('static', filename='images/header.jpg') }}')"
+      class="relative bg-cover bg-center text-white overflow-hidden"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-emerald-900/80"
+      ></div>
+
+      <!-- Header Section -->
+      <div class="relative container mx-auto px-6 py-12">
+        <div
+          class="flex flex-col lg:flex-row items-center justify-between gap-8"
+        >
+          <!-- Brand Section -->
+          <div class="flex items-center space-x-6">
+            <div class="relative">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-2xl transform rotate-3"
+              >
+                <svg
+                  class="w-12 h-12 text-emerald-900"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+              </div>
+              <div
+                class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center"
+              >
+                <span class="text-xs font-bold text-white">★</span>
+              </div>
+            </div>
+            <div class="text-left">
+              <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-1">
+                MANGGADIWA
+              </h1>
+              <p
+                class="text-xl md:text-2xl font-light text-emerald-200 tracking-wide"
+              >
+                Resort & Spa
+              </p>
+            </div>
+          </div>
+
+          <!-- Tagline & Contact Section -->
+          <div class="text-center lg:text-right max-w-2xl">
+            <div class="mb-6">
+              <p
+                class="text-lg md:text-xl text-emerald-100 leading-relaxed mb-3"
+              >
+                Indulge in breathtaking views, world-class amenities, and
+                impeccable service tailored to your every need.
+              </p>
+              <p
+                class="text-xl md:text-2xl font-semibold text-white tracking-wide"
+              >
+                Your island escape, elevated to perfection.
+              </p>
+            </div>
+
+            <!-- Rating Section -->
+            <div class="flex flex-col items-center lg:items-end">
+              <div class="flex items-center space-x-2 mb-3">
+                {% for star in range(1, 6) %}
+                <svg
+                  class="w-6 h-6 text-yellow-400 drop-shadow-lg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-6.09L22 12.27l-6.18-.54L12 6l-3.82 5.73-6.18.54L7.82 21z"
+                  />
+                </svg>
+                {% endfor %}
+                <span class="ml-3 text-lg font-medium text-emerald-100"
+                  >5.0 ★</span
+                >
+              </div>
+              <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
+                <span class="text-sm md:text-base font-medium"
+                  >For Booking and Inquiries:</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discount Banner Section (within same header) -->
+      <div
+        class="relative border-t border-white/10 bg-emerald-900/40 backdrop-blur-sm"
+      >
+        <div class="container mx-auto px-6 py-6">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-6"
+          >
+            <!-- Discount Info -->
+            <div class="text-center md:text-left">
+              <div
+                class="inline-flex items-center bg-yellow-500 text-emerald-900 px-4 py-2 rounded-full mb-3"
+              >
+                <svg
+                  class="w-5 h-5 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+                <span class="font-bold text-sm">LIMITED TIME OFFER</span>
+              </div>
+              <h3 class="text-2xl md:text-3xl font-bold mb-2">Save up to</h3>
+              <div
+                class="flex items-end justify-center md:justify-start space-x-2"
+              >
+                <span
+                  class="text-5xl md:text-6xl font-extrabold text-yellow-400"
+                  >40%</span
+                >
+                <span class="text-xl md:text-2xl text-emerald-200 mb-2"
+                  >off</span
+                >
+              </div>
+              <p class="mt-2 text-emerald-100 text-sm md:text-base">
+                Valid until <span class="font-semibold">Dec. 31, 2025</span> •
+                Monday-Thursday only
+              </p>
+              <p class="text-xs md:text-sm text-emerald-200 mt-1">
+                Not applicable on holidays and special events
+              </p>
+            </div>
+
+            <!-- CTA Button -->
+            <button
+              hx-post="/booking"
+              hx-target="#booking-modal"
+              hx-swap="innerHTML"
+              class="group bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-emerald-900 font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out min-w-48"
+            >
+              <div class="flex items-center justify-center space-x-2">
+                <span>BOOK NOW</span>
+                <svg
+                  class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="container mx-auto py-8 px-6">
+      <div class="flex justify-center space-x-2 mb-8">
+        <button
+          hx-get="/tab/rooms"
+          hx-target="#tab-content"
+          hx-swap="innerHTML"
+          class="tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-emerald-800 text-white shadow-lg transform -translate-y-1"
+          onclick="setActiveTab(this)"
+        >
+          Rooms & Suites
+        </button>
+        <button
+          hx-get="/tab/amenities"
+          hx-target="#tab-content"
+          hx-swap="innerHTML"
+          class="tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-white text-emerald-800 hover:bg-emerald-50 hover:shadow-md"
+          onclick="setActiveTab(this)"
+        >
+          Amenities
+        </button>
+        <button
+          hx-get="/tab/escape"
+          hx-target="#tab-content"
+          hx-swap="innerHTML"
+          class="tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-white text-emerald-800 hover:bg-emerald-50 hover:shadow-md"
+          onclick="setActiveTab(this)"
+        >
+          Manggadiwa Escape
+        </button>
+      </div>
+
+      <!-- Tab Content -->
+      <div
+        id="tab-content"
+        hx-get="/tab/rooms"
+        hx-trigger="load"
+        hx-swap="innerHTML"
+      >
+        <!-- Content will be loaded here -->
+      </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal"></div>
+
+    <!-- Footer -->
+    <footer
+      class="bg-gradient-to-r from-emerald-900 to-emerald-800 text-white py-12 mt-16"
+    >
+      <div class="container mx-auto px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8"
+        >
+          <div class="mb-6 md:mb-0">
+            <div class="flex items-center space-x-4">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center"
+              >
+                <svg
+                  class="w-10 h-10 text-emerald-900"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold">MANGGADIWA</h3>
+                <p class="text-lg text-emerald-200">Resort & Spa</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left"
+          >
+            <div
+              class="flex items-center justify-center md:justify-start space-x-3"
+            >
+              <div
+                class="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14v-2H5v2z"
+                  />
+                </svg>
+              </div>
+              <span class="text-sm">Info.manggadiwaresortandspa@gmail.com</span>
+            </div>
+            <div
+              class="flex items-center justify-center md:justify-start space-x-3"
+            >
+              <div
+                class="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.848.535l6.4 6.4a1 1 0 01.536.848v6.28a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
+                  />
+                </svg>
+              </div>
+              <span class="text-sm">09688731838 sms/viber</span>
+            </div>
+            <div
+              class="flex items-center justify-center md:justify-start space-x-3"
+            >
+              <div
+                class="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.995 1.995 0 01-2.828 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+              <span class="text-sm"
+                >Tando, Dolores, Nueva Valencia, Guimaras</span
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-emerald-700 pt-6 text-center text-sm text-emerald-300"
+        >
+          <p>&copy; 2024 Manggadiwa Resort & Spa. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function setActiveTab(button) {
+        // Remove active class from all buttons
+        document.querySelectorAll(".tab-button").forEach((btn) => {
+          btn.className =
+            "tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-white text-emerald-800 hover:bg-emerald-50 hover:shadow-md";
+        });
+
+        // Add active class to clicked button
+        button.className =
+          "tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-emerald-800 text-white shadow-lg transform -translate-y-1";
+      }
+    </script>
+  </body>
+</html>
