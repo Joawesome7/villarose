@@ -13,7 +13,7 @@ DATABASE_URL = os.environ.get("DATA")
 
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL or 'sqlite:///bookings.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
