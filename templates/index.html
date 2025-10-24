@@ -6,156 +6,92 @@
     <title>Manggadiwa Resort & Spa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/class-tools.js"></script>
+
+    <!-- htmx animations -->
+    <link rel="stylesheet" href="../static/css/styles.css" />
   </head>
   <body class="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
-    <!-- Combined Header & Discount Banner -->
+    <!-- Hero Header -->
     <header
-      style="background-image: url('{{ url_for('static', filename='images/header.jpg') }}')"
-      class="relative bg-cover bg-center text-white overflow-hidden"
+      style="background-image: url('{{ url_for('static', filename='images/escape/exterior.jpg') }}')"
+      class="relative bg-cover bg-center text-white overflow-hidden min-h-screen flex items-center"
     >
       <div
-        class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-emerald-900/80"
+        class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"
       ></div>
 
-      <!-- Header Section -->
-      <div class="relative container mx-auto px-6 py-12">
+      <!-- Header Content -->
+      <div class="relative container mx-auto px-6 py-20">
         <div
-          class="flex flex-col lg:flex-row items-center justify-between gap-8"
+          class="flex flex-col items-center justify-center text-center space-y-8"
         >
           <!-- Brand Section -->
-          <div class="flex items-center space-x-6">
-            <div class="relative">
-              <div
-                class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center shadow-2xl transform rotate-3"
+          <div class="space-y-4">
+            <h1
+              class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight"
+            >
+              VILLA ROSE
+            </h1>
+            <!-- <p
+              class="text-3xl md:text-4xl lg:text-5xl font-light text-emerald-200 tracking-wide"
+            >
+              Resort & Spa
+            </p> -->
+          </div>
+
+          <!-- Tagline Section -->
+          <div class="max-w-4xl space-y-6 mt-8">
+            <p
+              class="text-2xl md:text-3xl lg:text-4xl text-white leading-relaxed font-semibold"
+            >
+              Your island escape, elevated to perfection.
+            </p>
+            <p
+              class="text-lg md:text-xl lg:text-2xl text-emerald-100 leading-relaxed"
+            >
+              Indulge in breathtaking views, world-class amenities, and
+              impeccable service tailored to your every need.
+            </p>
+          </div>
+
+          <!-- Rating Section -->
+          <div class="flex flex-col items-center space-y-4 mt-8">
+            <div class="flex items-center space-x-2">
+              {% for star in range(1, 6) %}
+              <svg
+                class="w-8 h-8 text-yellow-400 drop-shadow-lg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  class="w-12 h-12 text-emerald-900"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                  />
-                </svg>
-              </div>
-              <div
-                class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center"
+                <path
+                  d="M12 17.27L18.18 21l-1.64-6.09L22 12.27l-6.18-.54L12 6l-3.82 5.73-6.18.54L7.82 21z"
+                />
+              </svg>
+              {% endfor %}
+              <span class="ml-3 text-2xl font-medium text-emerald-100"
+                >5.0</span
               >
-                <span class="text-xs font-bold text-white">★</span>
-              </div>
             </div>
-            <div class="text-left">
-              <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-1">
-                MANGGADIWA
-              </h1>
-              <p
-                class="text-xl md:text-2xl font-light text-emerald-200 tracking-wide"
+            <div class="bg-white/20 backdrop-blur-sm rounded-full px-8 py-3">
+              <span class="text-lg md:text-xl font-medium"
+                >For Booking and Inquiries</span
               >
-                Resort & Spa
-              </p>
             </div>
           </div>
 
-          <!-- Tagline & Contact Section -->
-          <div class="text-center lg:text-right max-w-2xl">
-            <div class="mb-6">
-              <p
-                class="text-lg md:text-xl text-emerald-100 leading-relaxed mb-3"
-              >
-                Indulge in breathtaking views, world-class amenities, and
-                impeccable service tailored to your every need.
-              </p>
-              <p
-                class="text-xl md:text-2xl font-semibold text-white tracking-wide"
-              >
-                Your island escape, elevated to perfection.
-              </p>
-            </div>
-
-            <!-- Rating Section -->
-            <div class="flex flex-col items-center lg:items-end">
-              <div class="flex items-center space-x-2 mb-3">
-                {% for star in range(1, 6) %}
-                <svg
-                  class="w-6 h-6 text-yellow-400 drop-shadow-lg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 17.27L18.18 21l-1.64-6.09L22 12.27l-6.18-.54L12 6l-3.82 5.73-6.18.54L7.82 21z"
-                  />
-                </svg>
-                {% endfor %}
-                <span class="ml-3 text-lg font-medium text-emerald-100"
-                  >5.0 ★</span
-                >
-              </div>
-              <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
-                <span class="text-sm md:text-base font-medium"
-                  >For Booking and Inquiries:</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Discount Banner Section (within same header) -->
-      <div
-        class="relative border-t border-white/10 bg-emerald-900/40 backdrop-blur-sm"
-      >
-        <div class="container mx-auto px-6 py-6">
-          <div
-            class="flex flex-col md:flex-row items-center justify-between gap-6"
-          >
-            <!-- Discount Info -->
-            <div class="text-center md:text-left">
-              <div
-                class="inline-flex items-center bg-yellow-500 text-emerald-900 px-4 py-2 rounded-full mb-3"
-              >
-                <svg
-                  class="w-5 h-5 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                  />
-                </svg>
-                <span class="font-bold text-sm">LIMITED TIME OFFER</span>
-              </div>
-              <h3 class="text-2xl md:text-3xl font-bold mb-2">Save up to</h3>
-              <div
-                class="flex items-end justify-center md:justify-start space-x-2"
-              >
-                <span
-                  class="text-5xl md:text-6xl font-extrabold text-yellow-400"
-                  >40%</span
-                >
-                <span class="text-xl md:text-2xl text-emerald-200 mb-2"
-                  >off</span
-                >
-              </div>
-              <p class="mt-2 text-emerald-100 text-sm md:text-base">
-                Valid until <span class="font-semibold">Dec. 31, 2025</span> •
-                Monday-Thursday only
-              </p>
-              <p class="text-xs md:text-sm text-emerald-200 mt-1">
-                Not applicable on holidays and special events
-              </p>
-            </div>
-
-            <!-- CTA Button -->
+          <!-- CTA Button -->
+          <div class="mt-12">
             <button
               hx-post="/booking"
               hx-target="#booking-modal"
               hx-swap="innerHTML"
-              class="group bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-emerald-900 font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out min-w-48"
+              class="group bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-emerald-900 font-bold text-xl py-6 px-12 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 ease-in-out"
             >
-              <div class="flex items-center justify-center space-x-2">
+              <div class="flex items-center justify-center space-x-3">
                 <span>BOOK NOW</span>
                 <svg
-                  class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                  class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -174,13 +110,62 @@
       </div>
     </header>
 
+    <!-- Discount Banner -->
+    <div
+      class="bg-gradient-to-r from-emerald-700 to-emerald-800 text-white py-6 px-6"
+    >
+      <div class="container mx-auto">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <!-- Discount Info -->
+          <div class="text-center md:text-left">
+            <div
+              class="inline-flex items-center bg-yellow-500 text-emerald-900 px-4 py-2 rounded-full mb-3"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                />
+              </svg>
+              <span class="font-bold text-sm">LIMITED TIME OFFER</span>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold mb-2">Save up to</h3>
+            <div
+              class="flex items-end justify-center md:justify-start space-x-2"
+            >
+              <span class="text-5xl md:text-6xl font-extrabold text-yellow-400"
+                >40%</span
+              >
+              <span class="text-xl md:text-2xl text-emerald-200 mb-2">off</span>
+            </div>
+            <p class="mt-2 text-emerald-100 text-sm md:text-base">
+              Valid until <span class="font-semibold">Dec. 31, 2025</span> •
+              Monday-Thursday only
+            </p>
+            <p class="text-xs md:text-sm text-emerald-200 mt-1">
+              Not applicable on holidays and special events
+            </p>
+          </div>
+
+          <!-- Learn More Link -->
+          <a
+            href="#tab-content"
+            class="text-yellow-400 hover:text-yellow-300 font-semibold text-lg underline transition-colors"
+          >
+            Learn More →
+          </a>
+        </div>
+      </div>
+    </div>
+
     <!-- Navigation Tabs -->
     <div class="container mx-auto py-8 px-6">
       <div class="flex justify-center space-x-2 mb-8">
         <button
           hx-get="/tab/rooms"
           hx-target="#tab-content"
-          hx-swap="innerHTML"
+          hx-swap="innerHTML swap:300ms settle:300ms"
           class="tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-emerald-800 text-white shadow-lg transform -translate-y-1"
           onclick="setActiveTab(this)"
         >
@@ -189,7 +174,7 @@
         <button
           hx-get="/tab/amenities"
           hx-target="#tab-content"
-          hx-swap="innerHTML"
+          hx-swap="innerHTML swap:300ms settle:300ms"
           class="tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-white text-emerald-800 hover:bg-emerald-50 hover:shadow-md"
           onclick="setActiveTab(this)"
         >
@@ -198,11 +183,11 @@
         <button
           hx-get="/tab/escape"
           hx-target="#tab-content"
-          hx-swap="innerHTML"
+          hx-swap="innerHTML swap:300ms settle:300ms"
           class="tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-white text-emerald-800 hover:bg-emerald-50 hover:shadow-md"
           onclick="setActiveTab(this)"
         >
-          Manggadiwa Escape
+          Villa Rose Escape
         </button>
       </div>
 
@@ -244,7 +229,7 @@
                 </svg>
               </div>
               <div>
-                <h3 class="text-2xl font-bold">MANGGADIWA</h3>
+                <h3 class="text-2xl font-bold">VILLA ROSE</h3>
                 <p class="text-lg text-emerald-200">Resort & Spa</p>
               </div>
             </div>
@@ -259,39 +244,286 @@
                 class="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center"
               >
                 <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
+                  id="Gmail_24"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14v-2H5v2z"
+                  <rect
+                    width="24"
+                    height="24"
+                    stroke="none"
+                    fill="#000000"
+                    opacity="0"
                   />
+
+                  <g transform="matrix(0.42 0 0 0.42 12 12)">
+                    <g style="">
+                      <g transform="matrix(1 0 0 1 -16.76 4.18)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(92, 122, 175);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-7.24, -28.18)"
+                          d="M 12.47 40.69 C 11.4 40.61 9.97 40.599999999999994 8.9 40.65 C 7.74 40.71 6.5600000000000005 40.839999999999996 5.41 40.62 C 4.26 40.41 3.12 39.79 2.62 38.72 C 2.3200000000000003 38.089999999999996 2.2800000000000002 37.37 2.25 36.66 C 2.21 35.93 2.17 35.19 2.2 34.449999999999996 C 2.24 33.449999999999996 2.39 32.449999999999996 2.46 31.449999999999996 C 2.51 30.649999999999995 2.51 29.849999999999994 2.5 29.039999999999996 C 2.68 24.549999999999997 2.1 20.079999999999995 2.01 15.609999999999996 C 4.27 17.769999999999996 7.3 19.679999999999996 9.89 21.399999999999995 C 10.610000000000001 21.879999999999995 11.290000000000001 22.399999999999995 11.96 22.939999999999994 C 12.05 24.069999999999993 12.16 25.169999999999995 12.25 26.329999999999995 C 12.36 27.699999999999996 12.36 29.079999999999995 12.37 30.459999999999994 C 12.38 33.71 12.47 40.69 12.47 40.69 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 -17.02 -8.53)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(180, 59, 44);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-6.98, -15.47)"
+                          d="M 11.96 22.94 C 11.290000000000001 22.400000000000002 10.610000000000001 21.880000000000003 9.89 21.400000000000002 C 7.300000000000001 19.680000000000003 4.2700000000000005 17.770000000000003 2.0100000000000007 15.610000000000003 C 1.9900000000000007 14.610000000000003 2.000000000000001 13.610000000000003 2.0400000000000005 12.610000000000003 C 1.8200000000000005 8.230000000000004 7.120000000000001 6.580000000000003 10.07 9.380000000000003 C 10.64 9.850000000000003 11.17 10.290000000000003 11.66 10.700000000000003 C 11.71 11.980000000000002 11.63 13.660000000000004 11.72 14.850000000000003 C 11.89 17.030000000000005 11.75 19.310000000000002 11.860000000000001 21.500000000000004 C 11.89 21.99 11.92 22.47 11.96 22.94 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 -0.04 -2.65)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(204, 39, 41);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-23.96, -21.35)"
+                          d="M 35.5 21.63 C 35.46 22.4 35.43 23.16 35.41 23.91 C 31.47 26.45 27.99 29.5 24 32 C 20.84 29.64 17.55 27.55 14.61 25.14 C 13.719999999999999 24.41 12.85 23.66 11.959999999999999 22.94 C 11.92 22.470000000000002 11.889999999999999 21.990000000000002 11.86 21.5 C 11.75 19.31 11.889999999999999 17.03 11.719999999999999 14.85 C 11.629999999999999 13.66 11.709999999999999 11.98 11.659999999999998 10.7 C 14.049999999999999 12.7 15.749999999999998 14.139999999999999 17.979999999999997 15.969999999999999 C 19.859999999999996 17.31 22.019999999999996 18.38 23.999999999999996 19.47 C 28.319999999999997 17.2 32.339999999999996 14.349999999999998 36.169999999999995 11.36 C 36.52 14.55 35.68 18.49 35.5 21.63 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 16.73 -8.05)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(254, 191, 16);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-40.73, -15.95)"
+                          d="M 46.05 15.31 C 42.769999999999996 18.740000000000002 39.47 21.34 36.059999999999995 23.48 C 35.839999999999996 23.62 35.629999999999995 23.76 35.41 23.91 C 35.43 23.16 35.459999999999994 22.4 35.5 21.63 C 35.68 18.49 36.52 14.549999999999999 36.17 11.36 C 36.56 11.059999999999999 36.940000000000005 10.76 37.32 10.459999999999999 C 38.37 9.629999999999999 39.43 8.77 40.7 8.309999999999999 C 41.96 7.849999999999999 43.5 7.849999999999999 44.56 8.659999999999998 C 45.27 9.2 45.68 10.029999999999998 45.86 10.879999999999999 C 45.99 12.29 46.04 13.77 46.05 15.31 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 16.76 4.16)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(110, 179, 125);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-40.76, -28.16)"
+                          d="M 45.87 39.21 C 45.69 39.78 45.239999999999995 40.25 44.71 40.53 C 44.18000000000001 40.81 43.59 40.93 42.99 40.980000000000004 C 41.5 41.09 40.02 40.75000000000001 38.53 40.7 C 37.64 40.67 36.4 40.730000000000004 35.5 40.800000000000004 C 35.5 40.800000000000004 35.49 37.89 35.5 36.77 C 35.53 32.36 35.29 28.230000000000004 35.41 23.910000000000004 C 35.629999999999995 23.760000000000005 35.839999999999996 23.620000000000005 36.059999999999995 23.480000000000004 C 39.47 21.340000000000003 42.769999999999996 18.740000000000002 46.05 15.310000000000004 C 46.07 19.320000000000004 45.79 23.660000000000004 45.779999999999994 27.760000000000005 C 45.78 31.35 46.52 35.66 45.87 39.21 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 0.06 0.5)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(0, 0, 0);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-24.06, -24.5)"
+                          d="M 35.62 11.658 C 35.933 13.788 35.651999999999994 15.953 35.379999999999995 18.072 C 35.102999999999994 20.229 34.931999999999995 22.369999999999997 34.892999999999994 24.544999999999998 C 34.815999999999995 28.767999999999997 35.01299999999999 32.992 34.998999999999995 37.214999999999996 C 34.995 38.410999999999994 34.998 39.607 35.001 40.803 C 35.001999999999995 41.058 35.23 41.323 35.501 41.303 C 36.547999999999995 41.224999999999994 37.604 41.157 38.653 41.205 C 39.868 41.260999999999996 41.07 41.492999999999995 42.287 41.5 C 43.333 41.506 44.454 41.367 45.32 40.733 C 46.139 40.132999999999996 46.374 39.361 46.493 38.394 C 46.77 36.144 46.6 33.861999999999995 46.453 31.608999999999998 C 46.303000000000004 29.314999999999998 46.27 27.04 46.326 24.741999999999997 C 46.385 22.362999999999996 46.487 19.985999999999997 46.529 17.605999999999998 C 46.54900000000001 16.438 46.55500000000001 15.268999999999998 46.529 14.099999999999998 C 46.505 13.016999999999998 46.516000000000005 11.886999999999997 46.35 10.814999999999998 C 46.051 8.882999999999997 44.435 7.545999999999998 42.513 7.502999999999998 C 40.415 7.455999999999999 38.701 8.734999999999998 37.134 9.971999999999998 C 32.899 13.315999999999997 28.528 16.507999999999996 23.75 19.040999999999997 C 23.918 19.040999999999997 24.086 19.040999999999997 24.255 19.040999999999997 C 22.072 17.842999999999996 19.735999999999997 16.766 17.802999999999997 15.173999999999996 C 16.214999999999996 13.865999999999996 14.637999999999998 12.544999999999996 13.058999999999997 11.225999999999996 C 12.142999999999997 10.460999999999995 11.218999999999998 9.704999999999995 10.313999999999997 8.928999999999995 C 9.712 8.413 9.05 8.008 8.292 7.764 C 6.918 7.32 5.374 7.443 4.089 8.1 C 2.7740000000000005 8.772 1.8380000000000005 10.039 1.6050000000000004 11.498999999999999 C 1.4330000000000005 12.576999999999998 1.4950000000000003 13.729 1.5000000000000004 14.817999999999998 C 1.5070000000000003 16.166999999999998 1.5660000000000005 17.514 1.6420000000000003 18.860999999999997 C 1.7960000000000003 21.596999999999998 2.0220000000000002 24.331999999999997 2.035 27.073999999999998 C 2.041 28.409999999999997 2.039 29.758 1.9760000000000002 31.092 C 1.9150000000000003 32.378 1.6940000000000002 33.650999999999996 1.6900000000000002 34.94 C 1.6860000000000002 36.204 1.624 37.699999999999996 2.1460000000000004 38.879 C 2.5940000000000003 39.89 3.5360000000000005 40.564 4.559 40.916999999999994 C 5.8790000000000004 41.373 7.304 41.233999999999995 8.671 41.160999999999994 C 9.934 41.092999999999996 11.203 41.10099999999999 12.465 41.184999999999995 C 12.733 41.202999999999996 12.968 40.94199999999999 12.965 40.684999999999995 C 12.935 38.160999999999994 12.908 35.63699999999999 12.887 33.11299999999999 C 12.871 31.17599999999999 12.903 29.23399999999999 12.809000000000001 27.298999999999992 C 12.683000000000002 24.68999999999999 12.329 22.104999999999993 12.314000000000002 19.487999999999992 C 12.306000000000003 18.058999999999994 12.333000000000002 16.627999999999993 12.242000000000003 15.201999999999993 C 12.151000000000003 13.777999999999993 12.234000000000004 12.351999999999993 12.134000000000002 10.929999999999993 C 12.089000000000002 10.291999999999993 11.089000000000002 10.286999999999992 11.134000000000002 10.929999999999993 C 11.220000000000002 12.154999999999992 11.128000000000002 13.381999999999993 11.200000000000003 14.606999999999992 C 11.277000000000003 15.916999999999993 11.311000000000003 17.21999999999999 11.312000000000003 18.531999999999993 C 11.313000000000002 21.14699999999999 11.549000000000003 23.721999999999994 11.748000000000003 26.32699999999999 C 12.033000000000003 30.063999999999993 11.890000000000002 33.86399999999999 11.931000000000003 37.61099999999999 C 11.942000000000002 38.63599999999999 11.953000000000003 39.66099999999999 11.965000000000003 40.68499999999999 C 12.132000000000003 40.51799999999999 12.298000000000004 40.35199999999999 12.465000000000003 40.18499999999999 C 11.467000000000004 40.118999999999986 10.464000000000004 40.10299999999999 9.464000000000004 40.12899999999999 C 8.383000000000004 40.15699999999999 7.301000000000004 40.29299999999999 6.219000000000004 40.221999999999994 C 5.205000000000004 40.154999999999994 4.119000000000003 39.84199999999999 3.428000000000004 39.050999999999995 C 2.691000000000004 38.208999999999996 2.7520000000000038 36.97599999999999 2.711000000000004 35.925 C 2.6640000000000037 34.729 2.7570000000000037 33.562999999999995 2.875000000000004 32.375 C 2.994000000000004 31.18 2.981000000000004 29.993 3.011000000000004 28.795 C 3.072000000000004 26.378 2.9570000000000043 23.968000000000004 2.807000000000004 21.555 C 2.657000000000004 19.148 2.489000000000004 16.74 2.500000000000004 14.328 C 2.507000000000004 12.737 2.342000000000004 10.991999999999999 3.528000000000004 9.75 C 4.413 8.822 5.72 8.417 6.981 8.515 C 8.681 8.647 9.817 9.82 11.059999999999999 10.856000000000002 C 14.043999999999999 13.343000000000002 16.921 16.089000000000002 20.305999999999997 18.022000000000002 C 21.282999999999998 18.580000000000002 22.278999999999996 19.104000000000003 23.266999999999996 19.641000000000002 C 23.686999999999998 19.869000000000003 23.903999999999996 20.052000000000003 24.355999999999995 19.851000000000003 C 24.875999999999994 19.62 25.373999999999995 19.301000000000002 25.868999999999993 19.019000000000002 C 27.87099999999999 17.880000000000003 29.80699999999999 16.626 31.69299999999999 15.303 C 33.51599999999999 14.024000000000001 35.29299999999999 12.679 37.04599999999999 11.305 C 38.65399999999999 10.044 40.41499999999999 8.394 42.60999999999999 8.504 C 43.68299999999999 8.558 44.581999999999994 9.103 45.06199999999999 10.074 C 45.51599999999999 10.993 45.459999999999994 12.111 45.49899999999999 13.113 C 45.58599999999999 15.344999999999999 45.54099999999999 17.58 45.475999999999985 19.811999999999998 C 45.408999999999985 22.115999999999996 45.31499999999998 24.418999999999997 45.289999999999985 26.723999999999997 C 45.265999999999984 28.877999999999997 45.42899999999999 31.014999999999997 45.55099999999999 33.163999999999994 C 45.612999999999985 34.267999999999994 45.65699999999999 35.37499999999999 45.62899999999999 36.480999999999995 C 45.60499999999999 37.422 45.715999999999994 38.879 45.06699999999999 39.626999999999995 C 44.31699999999999 40.492 42.99199999999999 40.532999999999994 41.93599999999999 40.49099999999999 C 40.767999999999994 40.44499999999999 39.61299999999999 40.230999999999995 38.443999999999996 40.196999999999996 C 37.462999999999994 40.16799999999999 36.47899999999999 40.23 35.501 40.303 C 35.668 40.47 35.833999999999996 40.635999999999996 36.001 40.803 C 35.992999999999995 37.803999999999995 36.013 34.806 35.954 31.806999999999995 C 35.867 27.373999999999995 35.755 22.942999999999994 36.32 18.534999999999997 C 36.625 16.157999999999998 36.936 13.781999999999996 36.584 11.391999999999996 C 36.491 10.758 35.527 11.027 35.62 11.658 L 35.62 11.658 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 0.1 -0.3)">
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: rgb(0, 0, 0);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-24.1, -23.7)"
+                          d="M 1.834 16.064 C 5.052 19.203 9.131 21.212 12.565 24.083 C 14.305 25.537999999999997 16.066 26.945 17.91 28.267 C 19.852 29.659 21.828 31.003 23.744 32.432 C 23.88 32.533 24.111 32.519000000000005 24.249 32.432 C 28.354 29.843000000000004 32.021 26.633000000000003 36.117 24.032000000000004 C 39.867999999999995 21.650000000000002 43.318 19.005000000000003 46.37 15.758000000000004 C 46.811 15.289000000000005 46.105 14.581000000000005 45.663 15.051000000000004 C 44.102999999999994 16.710000000000004 42.443999999999996 18.272000000000006 40.656 19.683000000000003 C 38.986 21.001000000000005 37.205 22.147000000000002 35.416 23.294000000000004 C 31.397 25.870000000000005 27.784 29.022000000000006 23.743999999999996 31.569000000000003 C 23.911999999999995 31.569000000000003 24.079999999999995 31.569000000000003 24.248999999999995 31.569000000000003 C 22.395999999999994 30.187 20.487999999999996 28.885 18.606999999999996 27.541000000000004 C 16.701999999999995 26.180000000000003 14.891999999999996 24.724000000000004 13.093999999999996 23.227000000000004 C 9.713999999999995 20.414000000000005 5.7019999999999955 18.441000000000003 2.540999999999995 15.357000000000003 C 2.08 14.907 1.372 15.614 1.834 16.064 L 1.834 16.064 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                    </g>
+                  </g>
                 </svg>
               </div>
-              <span class="text-sm">Info.manggadiwaresortandspa@gmail.com</span>
+              <span class="text-sm">Info.villaroseresortandspa@gmail.com</span>
             </div>
-            <div
-              class="flex items-center justify-center md:justify-start space-x-3"
-            >
+            <div class="flex items-center justify-center space-x-3">
               <div
                 class="w-10 h-10 bg-emerald-700 rounded-lg flex items-center justify-center"
               >
                 <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
+                  id="Viber_24"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.848.535l6.4 6.4a1 1 0 01.536.848v6.28a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
+                  <rect
+                    width="24"
+                    height="24"
+                    stroke="none"
+                    fill="#000000"
+                    opacity="0"
                   />
+
+                  <g transform="matrix(0.42 0 0 0.42 12 12)">
+                    <g style="">
+                      <g transform="matrix(1 0 0 1 0 1)">
+                        <linearGradient
+                          id="SVGID_kVR4WAMiBT-ffYOHy6lJja_1"
+                          gradientUnits="userSpaceOnUse"
+                          gradientTransform="matrix(1 0 0 1 0 0)"
+                          x1="14.111"
+                          y1="-5.971"
+                          x2="34.153"
+                          y2="51.731"
+                        >
+                          <stop
+                            offset="0%"
+                            style="
+                              stop-color: rgb(252, 252, 252);
+                              stop-opacity: 1;
+                            "
+                          />
+                          <stop
+                            offset="49.5%"
+                            style="
+                              stop-color: rgb(244, 244, 244);
+                              stop-opacity: 1;
+                            "
+                          />
+                          <stop
+                            offset="94.6%"
+                            style="
+                              stop-color: rgb(232, 232, 232);
+                              stop-opacity: 1;
+                            "
+                          />
+                          <stop
+                            offset="100%"
+                            style="
+                              stop-color: rgb(232, 232, 232);
+                              stop-opacity: 1;
+                            "
+                          />
+                        </linearGradient>
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: url(#SVGID_kVR4WAMiBT-ffYOHy6lJja_1);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-24, -25)"
+                          d="M 24 5 C 21.361 5 13.33 5 8.89 9.054 C 6.246 11.688 5 15.494 5 21 L 5 24 C 5 29.506 6.246 33.312 8.921 35.976 C 10.253 37.191 12.068999999999999 38.162 14.289 38.833 L 15 39.047 L 15 44.375 C 15 45 15.181 45 15.241 45 C 15.363999999999999 45 15.561 44.961 15.934999999999999 44.629 C 16.025 44.54 16.685 43.826 19.895 40.23 L 20.219 39.867 L 20.704 39.897999999999996 C 21.779 39.965 22.888 40 24 40 C 26.639 40 34.67 40 39.11 35.945 C 41.753 33.311 43 29.505 43 24 L 43 21 C 43 15.494 41.754 11.688 39.079 9.024 C 34.67 5 26.639 5 24 5 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                      <g transform="matrix(1 0 0 1 0 1)">
+                        <linearGradient
+                          id="SVGID_kVR4WAMiBT-ffYOHy6lJjb_2"
+                          gradientUnits="userSpaceOnUse"
+                          gradientTransform="matrix(1 0 0 1 0 0)"
+                          x1="42.608"
+                          y1="48.397"
+                          x2="2.522"
+                          y2="-7.263"
+                        >
+                          <stop
+                            offset="0%"
+                            style="
+                              stop-color: rgb(145, 47, 189);
+                              stop-opacity: 1;
+                            "
+                          />
+                          <stop
+                            offset="100%"
+                            style="
+                              stop-color: rgb(147, 50, 191);
+                              stop-opacity: 1;
+                            "
+                          />
+                        </linearGradient>
+                        <path
+                          style="
+                            stroke: none;
+                            stroke-width: 1;
+                            stroke-dasharray: none;
+                            stroke-linecap: butt;
+                            stroke-dashoffset: 0;
+                            stroke-linejoin: miter;
+                            stroke-miterlimit: 4;
+                            fill: url(#SVGID_kVR4WAMiBT-ffYOHy6lJjb_2);
+                            fill-rule: nonzero;
+                            opacity: 1;
+                          "
+                          transform=" translate(-24, -25)"
+                          d="M 33.451 28.854 C 32.34 27.918 31.827 27.634999999999998 30.293 26.714 C 29.654 26.331 28.68 26 28.169 26 C 27.82 26 27.402 26.267 27.146 26.523 C 26.49 27.179 26.275 28 25.125 28 C 24 28 22.035 26.855 20.625 25.375 C 19.145 23.965 18 22 18 20.875 C 18 19.725 18.806 19.495 19.462 18.838 C 19.718 18.583 20 18.165 20 17.816 C 20 17.305 19.669 16.346 19.286 15.706999999999999 C 18.365000000000002 14.171999999999999 18.083000000000002 13.658999999999999 17.146 12.549 C 16.829 12.173 16.468 12.001 16.09 12 C 15.451 11.999 14.612 12.316 14.044 12.739 C 13.190000000000001 13.376000000000001 12.297 14.243 12.058 15.323 C 12.026 15.47 12.007 15.618 12.001 15.766 C 11.955 16.891 12.397 18.033 12.873999999999999 19 C 13.996999999999998 21.279 15.482999999999999 23.485 17.099999999999998 25.455 C 17.616999999999997 26.084999999999997 18.18 26.671 18.762999999999998 27.237 C 19.328999999999997 27.819 19.915 28.381999999999998 20.544999999999998 28.9 C 22.514999999999997 30.517 24.720999999999997 32.003 27 33.126 C 27.958 33.598 29.086 34.032 30.2 34 C 30.358999999999998 33.995 30.518 33.977 30.677 33.942 C 31.756999999999998 33.704 32.624 32.81 33.261 31.956 C 33.684000000000005 31.387999999999998 34.001000000000005 30.55 34 29.91 C 33.999 29.532 33.827 29.171 33.451 28.854 z M 34 24 C 33.448 24 33 23.552 33 23 L 33 22 C 33 17.038 28.962 13 24 13 C 23.448 13 23 12.552 23 12 C 23 11.448 23.448 11 24 11 C 30.065 11 35 15.934999999999999 35 22 L 35 23 C 35 23.552 34.552 24 34 24 z M 27.858 22 C 27.414 22 27.008 21.702 26.891000000000002 21.252 C 26.617 20.201 25.797 19.38 24.75 19.11 C 24.215 18.971 23.894 18.426 24.032 17.891 C 24.17 17.357 24.714 17.035999999999998 25.251 17.173 C 26.999000000000002 17.625999999999998 28.369 18.994999999999997 28.826 20.747 C 28.965 21.282 28.645 21.826999999999998 28.111 21.967 C 28.026 21.989 27.941 22 27.858 22 z M 31 23 C 30.448 23 30 22.552 30 22 C 30 18.812 27.506 16.182000000000002 24.322 16.014 C 23.77 15.985 23.346999999999998 15.514 23.375999999999998 14.963 C 23.404999999999998 14.411 23.883999999999997 13.986999999999998 24.426999999999996 14.017 C 28.674 14.241 32 17.748 32 22 C 32 22.552 31.552 23 31 23 z M 24 4 C 19.5 4 12.488 4.414 8.216 8.316 C 5.196 11.323 4 15.541 4 21 C 4 21.452 3.998 21.956 4.002 22.5 C 3.998 23.043 4 23.547 4 23.999 C 4 29.458 5.196 33.676 8.216000000000001 36.683 C 9.842 38.168 11.870000000000001 39.145 14 39.789 L 14 44.375 C 14 45.971 15.049 46 15.241 46 L 15.25 46 C 15.744 45.998 16.171 45.756 16.599 45.376 C 16.76 45.233 18.619 43.161 20.641 40.894999999999996 C 21.845 40.972 22.989 41 23.999 41 L 23.999 41 L 23.999 41 C 28.499 41 35.51 40.585 39.783 36.683 C 42.802 33.677 43.999 29.458 43.999 23.999000000000002 C 43.999 23.547 44.001000000000005 23.043000000000003 43.997 22.499000000000002 C 44.001 21.955000000000002 43.999 21.452 43.999 20.999000000000002 C 43.999 15.540000000000003 42.803000000000004 11.322000000000003 39.783 8.315000000000003 C 35.511 4.414 28.5 4 24 4 z M 41 23.651 L 41 23.999 C 41 28.904999999999998 39.955 32.248 37.714 34.510999999999996 C 33.832 38 26.437 38 23.999 38 C 23.256999999999998 38 22.052999999999997 37.999 20.631999999999998 37.9 C 20.237 38.344 16 43.083 16 43.083 L 16 37.22 C 13.896 36.714999999999996 11.817 35.887 10.286 34.512 C 8.045 32.248 7 28.905 7 23.999 L 7 23.651 C 7 23.3 6.999 22.921 7.002 22.478 C 6.999 22.078 6.999 21.7 7 21.348 L 7 21 C 7 16.094 8.045 12.751 10.286 10.488 C 14.167 6.999 21.563 6.999 24 6.999 C 26.437 6.999 33.832 6.999 37.713 10.488 C 39.955 12.751 40.999 16.094 40.999 21 L 40.999 21.348 C 40.999 21.698999999999998 41 22.078 40.997 22.521 C 41 22.922 41 23.3 41 23.651 z"
+                          stroke-linecap="round"
+                        />
+                      </g>
+                    </g>
+                  </g>
                 </svg>
               </div>
               <span class="text-sm">09688731838 sms/viber</span>
@@ -331,23 +563,166 @@
         <div
           class="border-t border-emerald-700 pt-6 text-center text-sm text-emerald-300"
         >
-          <p>&copy; 2024 Manggadiwa Resort & Spa. All rights reserved.</p>
+          <p>&copy; 2025 Villa Rose Resort & Spa. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
-    <script>
-      function setActiveTab(button) {
-        // Remove active class from all buttons
-        document.querySelectorAll(".tab-button").forEach((btn) => {
-          btn.className =
-            "tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-white text-emerald-800 hover:bg-emerald-50 hover:shadow-md";
-        });
+    <!-- Chatbot Widget -->
+    <div id="chatbot-container" class="fixed bottom-6 right-6 z-50">
+      <!-- Chat Button -->
+      <button
+        id="chat-toggle"
+        onclick="toggleChat()"
+        class="bg-emerald-800 hover:bg-emerald-700 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110"
+      >
+        <svg
+          id="chat-icon"
+          class="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+          />
+        </svg>
+        <svg
+          id="close-icon"
+          class="w-8 h-8 hidden"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
 
-        // Add active class to clicked button
-        button.className =
-          "tab-button px-8 py-4 rounded-xl font-semibold transition-all duration-300 bg-emerald-800 text-white shadow-lg transform -translate-y-1";
-      }
-    </script>
+      <!-- Chat Window -->
+      <div
+        id="chat-window"
+        class="hidden absolute bottom-20 right-0 w-96 bg-white rounded-2xl shadow-2xl overflow-hidden"
+        style="max-width: calc(100vw - 2rem); height: 500px"
+      >
+        <!-- Chat Header -->
+        <div
+          class="bg-gradient-to-r from-emerald-800 to-emerald-700 text-white p-4"
+        >
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center"
+            >
+              <span class="text-emerald-900 font-bold text-xl">M</span>
+            </div>
+            <div>
+              <h3 class="font-bold">Villa Rose Assistant</h3>
+              <p class="text-xs text-emerald-100">
+                Online • Typically replies instantly
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div
+          id="chat-messages"
+          class="h-80 overflow-y-auto p-4 space-y-3 bg-gray-50"
+        >
+          <!-- Welcome Message -->
+          <div class="flex items-start space-x-2">
+            <div
+              class="w-8 h-8 bg-emerald-800 rounded-full flex items-center justify-center flex-shrink-0"
+            >
+              <span class="text-white text-sm">🏨</span>
+            </div>
+            <div
+              class="bg-white rounded-lg rounded-tl-none p-3 shadow-sm max-w-xs"
+            >
+              <p class="text-sm text-gray-800">
+                Hello! 👋 Welcome to Villa Rose Resort & Spa!
+              </p>
+              <p class="text-sm text-gray-800 mt-2">
+                How can I help you today?
+              </p>
+            </div>
+          </div>
+
+          <!-- Quick Reply Buttons -->
+          <div id="quick-replies" class="flex flex-col space-y-2 pl-10">
+            <button
+              onclick="askQuestion('rooms')"
+              class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-sm px-4 py-2 rounded-lg text-left transition-colors"
+            >
+              🏨 View Room Types & Prices
+            </button>
+            <button
+              onclick="askQuestion('amenities')"
+              class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-sm px-4 py-2 rounded-lg text-left transition-colors"
+            >
+              ✨ What amenities do you offer?
+            </button>
+            <button
+              onclick="askQuestion('location')"
+              class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-sm px-4 py-2 rounded-lg text-left transition-colors"
+            >
+              📍 Where are you located?
+            </button>
+            <button
+              onclick="askQuestion('booking')"
+              class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-sm px-4 py-2 rounded-lg text-left transition-colors"
+            >
+              📞 How to book?
+            </button>
+            <button
+              onclick="askQuestion('discount')"
+              class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-sm px-4 py-2 rounded-lg text-left transition-colors"
+            >
+              💰 Tell me about the discount
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-4 bg-white border-t border-gray-200">
+          <div class="flex space-x-2">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Type your message..."
+              class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              onkeypress="if(event.key === 'Enter') sendMessage()"
+            />
+            <button
+              onclick="sendMessage()"
+              class="bg-emerald-800 hover:bg-emerald-700 text-white rounded-full w-10 h-10 flex items-center justify-center transition-colors"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/js/main.js"></script>
   </body>
 </html>

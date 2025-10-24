@@ -1,61 +1,401 @@
-<div
-  class="bg-gradient-to-br from-emerald-50 to-white rounded-2xl shadow-xl overflow-hidden"
->
-  <div class="flex flex-col md:flex-row">
-    <div class="md:w-1/2">
-      <img
-        src="https://placehold.co/800x600?text=Manggadiwa+Escape"
-        alt="Manggadiwa Escape"
-        class="w-full h-full object-cover"
-      />
-    </div>
-    <div class="md:w-1/2 p-12">
-      <h2 class="text-5xl font-bold text-emerald-800 mb-6">
-        {{ package.title|upper }}
-      </h2>
-      <div
-        class="bg-gradient-to-r from-emerald-800 to-emerald-700 text-white p-6 rounded-xl mb-6"
-      >
-        <h3 class="text-2xl font-semibold mb-3">Applicable Days:</h3>
-        <p class="text-3xl font-bold mb-3">{{ package.days }}</p>
-        <p class="mb-2 text-lg">
-          <strong>Swimming Fee:</strong> ₱550 per person (Adults & Kids)
-        </p>
-        <p class="text-lg">
-          <strong>Resort Entrance Fee:</strong> {{ package.entrance_fee }} 🍽️
-        </p>
+<div>
+  <!-- Hero Section with Package Info -->
+  <div
+    class="bg-gradient-to-br from-emerald-50 to-white rounded-2xl shadow-xl overflow-hidden mb-8"
+  >
+    <div class="flex flex-col md:flex-row">
+      <div class="md:w-1/2">
+        <img
+          src="{{ url_for('static', filename='images/escape/exterior-house.jpg') }}"
+          alt="Manggadiwa Escape Pool"
+          class="w-full h-full object-cover"
+        />
       </div>
-      <p class="text-lg leading-relaxed mb-8">{{ package.description }}</p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button
-          hx-post="/booking"
-          hx-target="#booking-modal"
-          hx-swap="innerHTML"
-          class="group bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-900 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+      <div class="md:w-1/2 p-12">
+        <h2 class="text-5xl font-bold text-emerald-800 mb-6">
+          {{ package.title|upper }}
+        </h2>
+        <div
+          class="bg-gradient-to-r from-emerald-800 to-emerald-700 text-white p-6 rounded-xl mb-6"
         >
-          <div class="flex items-center justify-center space-x-2">
-            <span>Book Now</span>
-            <svg
-              class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </div>
-        </button>
-        <button
-          class="border-2 border-emerald-800 text-emerald-800 hover:bg-emerald-100 font-bold py-4 px-8 rounded-xl transition-colors"
-        >
-          Contact Us
-        </button>
+          <h3 class="text-2xl font-semibold mb-3">Applicable Days:</h3>
+          <p class="text-3xl font-bold mb-3">{{ package.days }}</p>
+          <p class="mb-2 text-lg">
+            <strong>Swimming Fee:</strong> ₱550 per person (Adults & Kids)
+          </p>
+          <p class="text-lg">
+            <strong>Resort Entrance Fee:</strong> {{ package.entrance_fee }} 🍽️
+          </p>
+        </div>
+        <p class="text-lg leading-relaxed mb-8">{{ package.description }}</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button
+            hx-post="/booking"
+            hx-target="#booking-modal"
+            hx-swap="innerHTML"
+            class="group bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-900 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          >
+            <div class="flex items-center justify-center space-x-2">
+              <span>Book Now</span>
+              <svg
+                class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </div>
+          </button>
+          <button
+            class="border-2 border-emerald-800 text-emerald-800 hover:bg-emerald-100 font-bold py-4 px-8 rounded-xl transition-colors"
+          >
+            Contact Us
+          </button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Photo Gallery Section -->
+  <div class="mb-8">
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-bold text-emerald-800 mb-4">
+        Experience Gallery
+      </h2>
+      <p class="text-xl text-gray-600">Discover the beauty that awaits you</p>
+      <div
+        class="w-32 h-1 bg-gradient-to-r from-emerald-600 to-emerald-400 mx-auto rounded-full mt-4"
+      ></div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Pool Photos -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
+        onclick="openLightbox(1)"
+      >
+        <img
+          src="{{ url_for('static', filename='images/escape/pool.jpg') }}"
+          alt="Resort Pool"
+          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+        >
+          <p class="text-white text-xl font-semibold p-4">Swimming Pool</p>
+        </div>
+      </div>
+
+      <!-- Surroundings -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
+        onclick="openLightbox(2)"
+      >
+        <img
+          src="{{ url_for('static', filename='images/escape/surroundings.jpg') }}"
+          alt="Beautiful Surroundings"
+          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+        >
+          <p class="text-white text-xl font-semibold p-4">Scenic Views</p>
+        </div>
+      </div>
+
+      <!-- Exterior -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
+        onclick="openLightbox(3)"
+      >
+        <img
+          src="{{ url_for('static', filename='images/escape/exterior.jpg') }}"
+          alt="Resort Exterior"
+          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+        >
+          <p class="text-white text-xl font-semibold p-4">
+            Resort Architecture
+          </p>
+        </div>
+      </div>
+
+      <!-- Bungalow VR -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
+        onclick="openLightbox(4)"
+      >
+        <img
+          src="{{ url_for('static', filename='images/escape/bungalow-1.jpg') }}"
+          alt="Bungalow Room"
+          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+        >
+          <p class="text-white text-xl font-semibold p-4">Bungalow View</p>
+        </div>
+      </div>
+
+      <!-- Additional Photo 1 -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
+        onclick="openLightbox(5)"
+      >
+        <img
+          src="{{ url_for('static', filename='images/escape/pool-area.jpg') }}"
+          alt="Pool Area"
+          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+        >
+          <p class="text-white text-xl font-semibold p-4">Pool Area</p>
+        </div>
+      </div>
+
+      <!-- Additional Photo 2 -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg"
+        onclick="openLightbox(6)"
+      >
+        <img
+          src="{{ url_for('static', filename='images/escape/bungalow-2.jpg') }}"
+          alt="Bungalow View"
+          class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+        >
+          <p class="text-white text-xl font-semibold p-4">
+            Cozy Accommodations
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add more photos button -->
+    <div class="text-center mt-8">
+      <p class="text-gray-600 text-sm">
+        📸 Click any photo to view in full size
+      </p>
+    </div>
+  </div>
+
+  <!-- What's Included Section -->
+  <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+    <h3 class="text-3xl font-bold text-emerald-800 mb-6 text-center">
+      What's Included
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="text-center p-6 bg-emerald-50 rounded-xl">
+        <div class="text-4xl mb-3">🏊</div>
+        <h4 class="font-bold text-lg text-emerald-800 mb-2">Swimming Pool</h4>
+        <p class="text-gray-600 text-sm">All-day access to our pristine pool</p>
+      </div>
+      <div class="text-center p-6 bg-emerald-50 rounded-xl">
+        <div class="text-4xl mb-3">🍽️</div>
+        <h4 class="font-bold text-lg text-emerald-800 mb-2">Restaurant</h4>
+        <p class="text-gray-600 text-sm">₱500 consumable credit</p>
+      </div>
+      <div class="text-center p-6 bg-emerald-50 rounded-xl">
+        <div class="text-4xl mb-3">🌴</div>
+        <h4 class="font-bold text-lg text-emerald-800 mb-2">Scenic Views</h4>
+        <p class="text-gray-600 text-sm">Beautiful island surroundings</p>
+      </div>
+      <div class="text-center p-6 bg-emerald-50 rounded-xl">
+        <div class="text-4xl mb-3">📸</div>
+        <h4 class="font-bold text-lg text-emerald-800 mb-2">Photo Spots</h4>
+        <p class="text-gray-600 text-sm">Instagram-worthy locations</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact CTA -->
+  <div
+    class="bg-gradient-to-r from-emerald-800 to-emerald-700 text-white rounded-2xl p-8 text-center"
+  >
+    <h3 class="text-3xl font-bold mb-4">Ready for Your Escape?</h3>
+    <p class="text-xl mb-6">
+      Contact us to confirm availability and make a reservation
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="tel:09688731838"
+        class="bg-white text-emerald-800 hover:bg-emerald-50 font-bold py-4 px-8 rounded-xl transition-colors inline-flex items-center justify-center"
+      >
+        <svg
+          class="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+          />
+        </svg>
+        Call: 09688731838
+      </a>
+      <a
+        href="mailto:Info.manggadiwaresortandspa@gmail.com"
+        class="bg-yellow-500 text-emerald-900 hover:bg-yellow-400 font-bold py-4 px-8 rounded-xl transition-colors inline-flex items-center justify-center"
+      >
+        <svg
+          class="w-5 h-5 mr-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          />
+        </svg>
+        Email Us
+      </a>
+    </div>
+  </div>
 </div>
+
+<!-- Lightbox Modal -->
+<div
+  id="lightbox"
+  class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4"
+>
+  <button
+    onclick="closeLightbox()"
+    class="absolute top-4 right-4 text-white hover:text-emerald-400 transition-colors z-10"
+  >
+    <svg
+      class="w-10 h-10"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+
+  <button
+    onclick="previousPhoto()"
+    class="absolute left-4 text-white hover:text-emerald-400 transition-colors text-6xl font-light"
+  >
+    ‹
+  </button>
+
+  <div class="max-w-6xl max-h-[90vh] flex flex-col items-center">
+    <img
+      id="lightbox-img"
+      class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+    />
+    <p id="lightbox-caption" class="text-white text-xl mt-4 text-center"></p>
+  </div>
+
+  <button
+    onclick="nextPhoto()"
+    class="absolute right-4 text-white hover:text-emerald-400 transition-colors text-6xl font-light"
+  >
+    ›
+  </button>
+
+  <div class="absolute bottom-4 text-white text-sm">
+    <span id="photo-counter"></span>
+  </div>
+</div>
+
+<script>
+  const photos = [
+    {
+      src: "/static/images/escape/header.jpg",
+      caption: "Exterior of The House",
+    },
+    {
+      src: "/static/images/escape/surroundings.jpg",
+      caption: "Beautiful Surroundings",
+    },
+    {
+      src: "/static/images/escape/exterior.jpg",
+      caption: "Resort Architecture",
+    },
+    {
+      src: "/static/images/escape/bungalow-1.jpg",
+      caption: "Bungalow Interiors",
+    },
+    { src: "/static/images/escape/pool-area.jpg", caption: "Relaxation Area" },
+    {
+      src: "/static/images/escape/bungalow-2.jpg",
+      caption: "Cozy Accommodations",
+    },
+  ];
+
+  let currentPhoto = 0;
+
+  function openLightbox(photoIndex) {
+    currentPhoto = photoIndex - 1;
+    const lightbox = document.getElementById("lightbox");
+    lightbox.classList.remove("hidden");
+    lightbox.classList.add("flex");
+    updateLightboxImage();
+
+    // Prevent body scroll
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.classList.add("hidden");
+    lightbox.classList.remove("flex");
+
+    // Restore body scroll
+    document.body.style.overflow = "";
+  }
+
+  function updateLightboxImage() {
+    const img = document.getElementById("lightbox-img");
+    const caption = document.getElementById("lightbox-caption");
+    const counter = document.getElementById("photo-counter");
+
+    img.src = photos[currentPhoto].src;
+    caption.textContent = photos[currentPhoto].caption;
+    counter.textContent = `${currentPhoto + 1} / ${photos.length}`;
+  }
+
+  function nextPhoto() {
+    currentPhoto = (currentPhoto + 1) % photos.length;
+    updateLightboxImage();
+  }
+
+  function previousPhoto() {
+    currentPhoto = (currentPhoto - 1 + photos.length) % photos.length;
+    updateLightboxImage();
+  }
+
+  // Keyboard navigation
+  document.addEventListener("keydown", function (e) {
+    const lightbox = document.getElementById("lightbox");
+    if (!lightbox.classList.contains("hidden")) {
+      if (e.key === "ArrowRight") nextPhoto();
+      if (e.key === "ArrowLeft") previousPhoto();
+      if (e.key === "Escape") closeLightbox();
+    }
+  });
+</script>

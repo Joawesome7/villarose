@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Villa Rose Resort</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-emerald-800 to-emerald-700 text-white shadow-lg"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <h1 class="text-2xl font-bold">Villa Rose Resort</h1>
+            <p class="text-emerald-100 text-sm">Admin Dashboard</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-sm">👤 Admin</span>
+            <a
+              href="{{ url_for('admin_logout') }}"
+              class="bg-emerald-900 hover:bg-emerald-950 px-4 py-2 rounded-lg text-sm transition-colors"
+            >
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-8">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Total Bookings</p>
+              <p class="text-3xl font-bold text-emerald-800">
+                {{ bookings|length }}
+              </p>
+            </div>
+            <div class="bg-emerald-100 rounded-full p-3">
+              <svg
+                class="w-8 h-8 text-emerald-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Pending</p>
+              <p class="text-3xl font-bold text-yellow-600">
+                {{ bookings|selectattr('status', 'equalto',
+                'pending')|list|length }}
+              </p>
+            </div>
+            <div class="bg-yellow-100 rounded-full p-3">
+              <svg
+                class="w-8 h-8 text-yellow-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Confirmed</p>
+              <p class="text-3xl font-bold text-green-600">
+                {{ bookings|selectattr('status', 'equalto',
+                'confirmed')|list|length }}
+              </p>
+            </div>
+            <div class="bg-green-100 rounded-full p-3">
+              <svg
+                class="w-8 h-8 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Cancelled</p>
+              <p class="text-3xl font-bold text-red-600">
+                {{ bookings|selectattr('status', 'equalto',
+                'cancelled')|list|length }}
+              </p>
+            </div>
+            <div class="bg-red-100 rounded-full p-3">
+              <svg
+                class="w-8 h-8 text-red-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar and Bookings -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Calendar -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">
+              📅 Booking Calendar
+            </h2>
+            <div id="calendar"></div>
+            <div class="mt-4 space-y-2 text-sm">
+              <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-emerald-500 rounded"></div>
+                <span>Confirmed</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-yellow-500 rounded"></div>
+                <span>Pending</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-4 h-4 bg-red-500 rounded"></div>
+                <span>Cancelled</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bookings List -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">
+              📋 Recent Bookings
+            </h2>
+            <div class="space-y-4 max-h-[600px] overflow-y-auto">
+              {% if bookings %} {% for booking in bookings|reverse %}
+              <div
+                class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+              >
+                <div class="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 class="font-bold text-lg text-gray-800">
+                      {{ booking.name }}
+                    </h3>
+                    <p class="text-sm text-gray-600">
+                      {{ booking.room_type|title }}
+                    </p>
+                  </div>
+                  <span
+                    class="px-3 py-1 rounded-full text-xs font-semibold {% if booking.status == 'confirmed' %}bg-green-100 text-green-800 {% elif booking.status == 'pending' %}bg-yellow-100 text-yellow-800 {% elif booking.status == 'cancelled' %}bg-red-100 text-red-800 {% endif %}"
+                  >
+                    {{ booking.status|upper }}
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-3">
+                  <p>📅 Check-in: {{ booking.checkin }}</p>
+                  <p>📅 Check-out: {{ booking.checkout }}</p>
+                  <p>👥 Guests: {{ booking.guests }}</p>
+                  <p>📞 {{ booking.phone }}</p>
+                </div>
+                {% if booking.requests %}
+                <p class="text-sm text-gray-600 mb-3">
+                  💬 {{ booking.requests }}
+                </p>
+                {% endif %}
+                <div class="flex space-x-2">
+                  {% if booking.status == 'pending' %}
+                  <button
+                    onclick="updateStatus({{ booking.id }}, 'confirmed')"
+                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                  >
+                    ✓ Confirm
+                  </button>
+                  <button
+                    onclick="updateStatus({{ booking.id }}, 'cancelled')"
+                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                  >
+                    ✗ Cancel
+                  </button>
+                  {% endif %}
+                  <button
+                    onclick="deleteBooking({{ booking.id }})"
+                    class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+                  >
+                    🗑 Delete
+                  </button>
+                </div>
+              </div>
+              {% endfor %} {% else %}
+              <p class="text-center text-gray-500 py-8">No bookings yet.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+         // Bookings data from Flask
+      const bookings = {{ bookings|tojson }};
+
+      // Simple calendar generator
+      function generateCalendar() {
+          const calendar = document.getElementById('calendar');
+          const today = new Date();
+          const currentMonth = today.getMonth();
+          const currentYear = today.getFullYear();
+
+          // Get first and last day of month
+          const firstDay = new Date(currentYear, currentMonth, 1);
+          const lastDay = new Date(currentYear, currentMonth + 1, 0);
+          const daysInMonth = lastDay.getDate();
+          const startingDayOfWeek = firstDay.getDay();
+
+          // Month names
+          const monthNames = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
+
+          let html = `
+              <div class="mb-4">
+                  <h3 class="text-center font-bold text-gray-800">${monthNames[currentMonth]} ${currentYear}</h3>
+              </div>
+              <div class="grid grid-cols-7 gap-1 text-center text-xs mb-2">
+                  <div class="font-semibold text-gray-600">Su</div>
+                  <div class="font-semibold text-gray-600">Mo</div>
+                  <div class="font-semibold text-gray-600">Tu</div>
+                  <div class="font-semibold text-gray-600">We</div>
+                  <div class="font-semibold text-gray-600">Th</div>
+                  <div class="font-semibold text-gray-600">Fr</div>
+                  <div class="font-semibold text-gray-600">Sa</div>
+              </div>
+              <div class="grid grid-cols-7 gap-1">
+          `;
+
+          // Add empty cells for days before month starts
+          for (let i = 0; i < startingDayOfWeek; i++) {
+              html += '<div class="p-2"></div>';
+          }
+
+          // Add days of month
+          for (let day = 1; day <= daysInMonth; day++) {
+              const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+              const isToday = day === today.getDate();
+
+              // Check if this date has bookings
+              const dayBookings = bookings.filter(b => {
+                  const checkin = new Date(b.checkin);
+                  const checkout = new Date(b.checkout);
+                  const currentDate = new Date(dateStr);
+                  return currentDate >= checkin && currentDate <= checkout;
+              });
+
+              let bgColor = 'bg-gray-50 hover:bg-gray-100';
+              if (isToday) bgColor = 'bg-blue-100';
+
+              if (dayBookings.length > 0) {
+                  const hasConfirmed = dayBookings.some(b => b.status === 'confirmed');
+                  const hasPending = dayBookings.some(b => b.status === 'pending');
+                  const hasCancelled = dayBookings.some(b => b.status === 'cancelled');
+
+                  if (hasConfirmed) bgColor = 'bg-emerald-500 text-white';
+                  else if (hasPending) bgColor = 'bg-yellow-500 text-white';
+                  else if (hasCancelled) bgColor = 'bg-red-500 text-white';
+              }
+
+              html += `
+                  <div class="p-2 ${bgColor} rounded text-center text-sm cursor-pointer transition-colors"
+                       onclick="showBookingsForDate('${dateStr}')"
+                       title="${dayBookings.length} booking(s)">
+                      ${day}
+                  </div>
+              `;
+          }
+
+          html += '</div>';
+          calendar.innerHTML = html;
+      }
+
+      function showBookingsForDate(dateStr) {
+          const dayBookings = bookings.filter(b => {
+              const checkin = new Date(b.checkin);
+              const checkout = new Date(b.checkout);
+              const currentDate = new Date(dateStr);
+              return currentDate >= checkin && currentDate <= checkout;
+          });
+
+          if (dayBookings.length === 0) {
+              alert('No bookings for this date');
+              return;
+          }
+
+          let message = `Bookings for ${dateStr}:\n\n`;
+          dayBookings.forEach(b => {
+              message += `${b.name} - ${b.room_type} (${b.status})\n`;
+          });
+          alert(message);
+      }
+
+      function updateStatus(bookingId, status) {
+          if (!confirm(`Are you sure you want to ${status} this booking?`)) return;
+
+          fetch(`/admin/api/booking/${bookingId}/status`, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ status: status })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  location.reload();
+              } else {
+                  alert('Error updating booking');
+              }
+          })
+          .catch(error => {
+              alert('Error: ' + error);
+          });
+      }
+
+      function deleteBooking(bookingId) {
+          if (!confirm('Are you sure you want to delete this booking? This cannot be undone.')) return;
+
+          fetch(`/admin/api/booking/${bookingId}`, {
+              method: 'DELETE'
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  location.reload();
+              } else {
+                  alert('Error deleting booking');
+              }
+          })
+          .catch(error => {
+              alert('Error: ' + error);
+          });
+      }
+
+      // Generate calendar on page load
+      generateCalendar();
+    </script>
+  </body>
+</html>

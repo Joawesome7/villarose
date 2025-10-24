@@ -1,0 +1,49 @@
+/* Fade in animation for htmx content */
+.htmx-settling {
+  opacity: 0;
+}
+.htmx-swapping {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
+
+/* Smooth content transitions */
+#tab-content {
+  transition: opacity 300ms ease-in-out;
+}
+
+/* Modal animations */
+#booking-modal > div {
+  animation: modalSlideIn 300ms ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading indicator */
+.htmx-request #tab-content {
+  opacity: 0.5;
+  transition: opacity 200ms ease-in;
+}
+
+/* Card hover animations */
+.room-card {
+  transition: all 300ms ease-in-out;
+}
+
+.room-card:hover {
+  transform: translateY(-8px);
+}
