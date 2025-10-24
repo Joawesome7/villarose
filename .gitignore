@@ -1,20 +1,8 @@
-# Python
 __pycache__/
 *.pyc
 *.pyo
-
-# Virtual environment
-venv/
-env/
-
-# Environment & credentials
-.env
-*.env
 *.db
-
-# System files
+.env
+bookings.json
+venv/
 .DS_Store
-
-# IDE
-.vscode/
-.idea/
